@@ -19,14 +19,14 @@ This project demonstrates CRUD operations, entity relationships, validation, and
 
 # 📁 Project Structure
 
-src/main/java/com/example/demo
+src/main/java/com/example/empmanagementapp
 
 ├── controller  
 ├── service  
 ├── repository  
 ├── entity  
 ├── exception  
-└── DemoApplication.java  
+└── EmpManAppApplication.java  
 
 ---
 
@@ -75,7 +75,7 @@ src/main/java/com/example/demo
 
 ---
 
-# 🔗 API Endpoints
+# 🔗 Sample API Endpoints
 
 ## 🏢 Department APIs
 
@@ -86,3 +86,19 @@ POST /api/departments
 {
   "name": "IT"
 }
+```
+
+
+## Employee APIs
+POST /api/employees
+
+```json
+{
+  "name": "Sai",
+  "email": "sai@gmail.com",
+  "department": {
+    "id": 1
+  }
+}
+```
+
