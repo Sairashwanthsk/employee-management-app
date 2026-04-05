@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 
 @RestController
@@ -43,8 +45,10 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteDepartment(@PathVariable Integer id) {
+    public Map<String, String> deleteDepartment(@PathVariable Integer id) {
         departmentService.deleteDepartment(id);
-        return "Department with ID " + id + " has been deleted.";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Department with ID " + id + " has been deleted.");
+        return response;
     }
 }
