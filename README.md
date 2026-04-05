@@ -104,3 +104,24 @@ POST /api/employees
 }
 ```
 
+## 🧠 Concepts Covered
+- REST API development
+- Spring Boot architecture
+- JPA relationships (OneToMany, ManyToOne)
+- Request validation
+- Exception handling
+- Query methods
+- RequestParam filtering
+
+
+## 📌 Future Improvements
+- DTO layer
+- Pagination & Sorting
+- Swagger API documentation
+- Spring Security authentication
+- Docker deployment
+
+
+## 👨‍💻 Author
+Built for learning Spring Boot backend development 🚀
+
