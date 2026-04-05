@@ -90,6 +90,8 @@ POST /api/departments
 
 
 ## Employee APIs
+
+### Create Employee
 POST /api/employees
 
 ```json
