@@ -1,0 +1,168 @@
+### Base URL
+@baseUrl = http://localhost:8080/api
+
+
+### Create Department (Success)
+POST {{baseUrl}}/departments
+Content-Type: application/json
+
+{
+    "name": "Engineering"
+}
+
+
+### Create Department (Failure - Duplicate ID)
+POST {{baseUrl}}/departments
+Content-Type: application/json
+
+{
+    "name": "Engineering"
+}
+
+
+### Get all departments
+GET {{baseUrl}}/departments
+Accept: application/json
+
+
+### Empty Department name (bad request)
+POST {{baseUrl}}/departments
+Content-Type: application/json
+
+{
+    "name": ""
+}
+
+
+### Employee Endpoints
+
+### Create a new employee
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "department": {
+        "id": 1
+    }
+}
+
+
+### Create a new employee with non-existing department
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "department": {
+        "id": 999
+    }
+}
+
+
+### Create Employee with missing email (bad request)
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "department": {
+        "id": 1
+    }
+}
+
+
+### Get all employees
+GET {{baseUrl}}/employees
+Accept: application/json
+
+
+### Get employees by department
+GET {{baseUrl}}/employees?departmentId=1
+Accept: application/json
+
+
+### Get employees by non-existing department (should return empty list)
+GET {{baseUrl}}/employees?departmentId=999
+Accept: application/json
+
+
+### Get employee by ID (valid)
+GET {{baseUrl}}/employees/1
+Accept: application/json
+
+
+### Get employee by ID (invalid)
+GET {{baseUrl}}/employees/999
+Accept: application/json
+
+
+### Update an existing employee (valid)
+PUT {{baseUrl}}/employees/1
+Content-Type: application/json
+
+{
+    "name": "John Doe Updated",
+    "email": "john.doe.updated@example.com",
+    "department": {
+        "id": 1
+    }
+}
+
+### Update an existing employee with non-existing department
+PUT {{baseUrl}}/employees/1
+Content-Type: application/json
+
+{
+    "name": "John Doe Updated",
+    "email": "john.doe.updated@example.com",
+    "department": {
+        "id": 999
+    }
+}
+
+
+### Delete an employee (valid)
+DELETE {{baseUrl}}/employees/6
+Accept: application/json
+
+
+### Delete an employee (invalid)
+DELETE {{baseUrl}}/employees/999
+Accept: application/json
+
+
+
+### Edge cases
+### Empty body for creating employee (bad request)
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{}
+
+### Empty body for creating department (bad request)
+POST {{baseUrl}}/departments
+Content-Type: application/json
+
+{}
+
+
+### Empty body for updating employee (bad request)
+PUT {{baseUrl}}/employees/1
+Content-Type: application/json
+
+{}
+
+
+### Empty body for updating department (bad request)
+PUT {{baseUrl}}/departments/1
+Content-Type: application/json
+
+{}
+
+
+### Wrong enpoint
+GET {{baseUrl}}/employee
+Accept: application/json

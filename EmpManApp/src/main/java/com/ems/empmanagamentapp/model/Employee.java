@@ -2,45 +2,39 @@ package com.ems.empmanagamentapp.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "employees")
 public class Employee {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
-    private String department;
 
-    public Employee() {
-    }
+    @NotNull(message = "Email cannot be null")
+    @NotEmpty(message = "Email cannot be empty")
+    @NotBlank(message = "Email cannot be blank")
+    @Size(max = 100, message = "Email must be less than 100 characters")
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    public Employee(int id, String name, String department) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    public int getId() {
-        return id;
-    }
+    private java.time.LocalDateTime createdAt;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
+    @PrePersist
+    protected void onCreate() {
+        createdAt = java.time.LocalDateTime.now();
     }
 }

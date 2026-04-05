@@ -1,4 +1,4 @@
-package com.ems.EmpManApp;
+package com.ems.empmanagamentapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
