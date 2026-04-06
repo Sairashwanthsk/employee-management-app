@@ -3,12 +3,14 @@ package com.ems.empmanagamentapp.service.interfaces;
 import com.ems.empmanagamentapp.dto.EmployeeRequestDTO;
 import com.ems.empmanagamentapp.dto.EmployeeResponseDTO;
 import com.ems.empmanagamentapp.model.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface EmployeeServiceInterface {
     EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto);
 
-    List<EmployeeResponseDTO> getAllEmployees();
+    Page<EmployeeResponseDTO> getAllEmployees(Pageable pageable);
 
     EmployeeResponseDTO getEmployeeById(Integer id);
 
@@ -16,5 +18,5 @@ public interface EmployeeServiceInterface {
 
     void deleteEmployee(Integer id);
 
-    List<EmployeeResponseDTO> getEmployeesByDepartmentId(Integer departmentId);
+    Page<EmployeeResponseDTO> getEmployeesByDepartmentId(Integer departmentId, Pageable pageable);
 }

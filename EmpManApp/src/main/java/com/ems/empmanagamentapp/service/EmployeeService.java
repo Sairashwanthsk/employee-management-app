@@ -72,13 +72,11 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-    public List<EmployeeResponseDTO> getEmployeesByDepartmentId(Integer departmentId) {
+    public Page<EmployeeResponseDTO> getEmployeesByDepartmentId(Integer departmentId, Pageable pageable) {
         if (!departmentRepository.existsById(departmentId)) {
             throw new ResourceNotFoundException("Department not found with ID: " + departmentId);
         }
-        return employeeRepository.findByDepartmentId(departmentId).stream()
-                .map(EmployeeMapper::toDTO)
-                .collect(Collectors.toList());
+        return employeeRepository.findByDepartmentId(departmentId, pageable).map(EmployeeMapper::toDTO);
     }
 
 }

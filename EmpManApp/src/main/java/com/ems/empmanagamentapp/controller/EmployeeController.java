@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class EmployeeController {
     // public List<EmployeeResponseDTO> getEmployees(@RequestParam(required = false) Integer departmentId) {
     public Page<EmployeeResponseDTO> getEmployees(Pageable pageable, @RequestParam(required = false) Integer departmentId) {
         if (departmentId != null) {
-            return employeeService.getEmployeesByDepartmentId(departmentId);
+            return employeeService.getEmployeesByDepartmentId(departmentId, pageable);
         }
         return employeeService.getAllEmployees(pageable);
     }
