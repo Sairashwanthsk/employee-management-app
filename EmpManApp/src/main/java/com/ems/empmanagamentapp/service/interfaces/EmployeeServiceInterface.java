@@ -1,18 +1,20 @@
 package com.ems.empmanagamentapp.service.interfaces;
 
+import com.ems.empmanagamentapp.dto.EmployeeRequestDTO;
+import com.ems.empmanagamentapp.dto.EmployeeResponseDTO;
 import com.ems.empmanagamentapp.model.Employee;
 import java.util.List;
 
 public interface EmployeeServiceInterface {
-    Employee createEmployee(Employee employee);
+    EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto);
 
-    List<Employee> getAllEmployees();
+    List<EmployeeResponseDTO> getAllEmployees();
 
-    Employee getEmployeeById(Integer id);
+    EmployeeResponseDTO getEmployeeById(Integer id);
 
-    Employee updateEmployee(Integer id, Employee employee);
+    EmployeeResponseDTO updateEmployee(Integer id, EmployeeRequestDTO dto);
 
     void deleteEmployee(Integer id);
 
-    List<Employee> getEmployeesByDepartmentId(Integer departmentId);
+    List<EmployeeResponseDTO> getEmployeesByDepartmentId(Integer departmentId);
 }

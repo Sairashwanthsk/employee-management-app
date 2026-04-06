@@ -2,12 +2,27 @@
 @baseUrl = http://localhost:8080/api
 
 
+### Get all departments
+GET {{baseUrl}}/departments
+Accept: application/json
+
+
+### Delete Department (valid)
+DELETE {{baseUrl}}/departments/10
+Accept: application/json
+
+
+### Delete Department (invalid)
+DELETE {{baseUrl}}/departments/999
+Accept: application/json
+
+
 ### Create Department (Success)
 POST {{baseUrl}}/departments
 Content-Type: application/json
 
 {
-    "name": "Engineering"
+    "name": "IT"
 }
 
 
@@ -16,13 +31,8 @@ POST {{baseUrl}}/departments
 Content-Type: application/json
 
 {
-    "name": "Engineering"
+    "name": "IT"
 }
-
-
-### Get all departments
-GET {{baseUrl}}/departments
-Accept: application/json
 
 
 ### Empty Department name (bad request)
@@ -36,16 +46,34 @@ Content-Type: application/json
 
 ### Employee Endpoints
 
+### Get all employees
+GET {{baseUrl}}/employees
+Accept: application/json
+
+
+### Get all employees with pagination
+GET {{baseUrl}}/employees?page=0&size=5
+Accept: application/json
+
+
+### Get all employees in sorted order
+GET {{baseUrl}}/employees?sort=name,asc
+Accept: application/json
+
+
+### Get all employees in sorted order with pagination
+GET {{baseUrl}}/employees?page=0&size=5&sort=name,asc
+Accept: application/json
+
+
 ### Create a new employee
 POST {{baseUrl}}/employees
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "department": {
-        "id": 1
-    }
+    "name": "John Doe 6",
+    "email": "john.doe6@example.com",
+    "departmentId": 12
 }
 
 
@@ -56,9 +84,7 @@ Content-Type: application/json
 {
     "name": "Jane Doe",
     "email": "jane.doe@example.com",
-    "department": {
-        "id": 999
-    }
+    "departmentId": 999
 }
 
 
@@ -68,19 +94,12 @@ Content-Type: application/json
 
 {
     "name": "John Doe",
-    "department": {
-        "id": 1
-    }
+    "department": 10
 }
 
 
-### Get all employees
-GET {{baseUrl}}/employees
-Accept: application/json
-
-
 ### Get employees by department
-GET {{baseUrl}}/employees?departmentId=1
+GET {{baseUrl}}/employees?departmentId=12
 Accept: application/json
 
 
@@ -90,7 +109,7 @@ Accept: application/json
 
 
 ### Get employee by ID (valid)
-GET {{baseUrl}}/employees/1
+GET {{baseUrl}}/employees/9
 Accept: application/json
 
 
@@ -100,32 +119,28 @@ Accept: application/json
 
 
 ### Update an existing employee (valid)
-PUT {{baseUrl}}/employees/1
+PUT {{baseUrl}}/employees/9
 Content-Type: application/json
 
 {
     "name": "John Doe Updated",
     "email": "john.doe.updated@example.com",
-    "department": {
-        "id": 1
-    }
+    "departmentId": 12
 }
 
 ### Update an existing employee with non-existing department
-PUT {{baseUrl}}/employees/1
+PUT {{baseUrl}}/employees/9
 Content-Type: application/json
 
 {
     "name": "John Doe Updated",
     "email": "john.doe.updated@example.com",
-    "department": {
-        "id": 999
-    }
+    "departmentId": 10
 }
 
 
 ### Delete an employee (valid)
-DELETE {{baseUrl}}/employees/6
+DELETE {{baseUrl}}/employees/9
 Accept: application/json
 
 

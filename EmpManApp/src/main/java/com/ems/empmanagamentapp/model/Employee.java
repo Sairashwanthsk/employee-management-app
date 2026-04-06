@@ -20,10 +20,6 @@ public class Employee {
 
     private String name;
 
-    @NotNull(message = "Email cannot be null")
-    @NotEmpty(message = "Email cannot be empty")
-    @NotBlank(message = "Email cannot be blank")
-    @Size(max = 100, message = "Email must be less than 100 characters")
     @Column(nullable = false, unique = true)
     private String email;
 

@@ -1,6 +1,9 @@
 package com.ems.empmanagamentapp.controller;
 import com.ems.empmanagamentapp.service.DepartmentService;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ems.empmanagamentapp.dto.DepartmentRequestDTO;
+import com.ems.empmanagamentapp.dto.DepartmentResponseDTO;
 import com.ems.empmanagamentapp.model.Department;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,23 +28,23 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    public Page<DepartmentResponseDTO> getAllDepartments(Pageable pageable) {
+        return departmentService.getAllDepartments(pageable);
     }
 
     @GetMapping("/{id}")
-    public Department getDepartmentById(@PathVariable Integer id) {
+    public DepartmentResponseDTO getDepartmentById(@PathVariable Integer id) {
         return departmentService.getDepartmentById(id);
     }
 
     @PostMapping
-    public Department createDepartment(@Valid @RequestBody Department department) {
-        return departmentService.createDepartment(department);
+    public DepartmentResponseDTO createDepartment(@Valid @RequestBody DepartmentRequestDTO dto) {
+        return departmentService.createDepartment(dto);
     }
 
     @PutMapping("/{id}")
-    public Department updateDepartment(@Valid @PathVariable Integer id, @RequestBody Department department) {
-        return departmentService.updateDepartment(id, department);
+    public DepartmentResponseDTO updateDepartment(@Valid @PathVariable Integer id, @RequestBody DepartmentRequestDTO dto) {
+        return departmentService.updateDepartment(id, dto);
     }
 
     @DeleteMapping("/{id}")

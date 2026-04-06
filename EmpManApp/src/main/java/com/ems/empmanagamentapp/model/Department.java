@@ -23,10 +23,6 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "Department name cannot be null")
-    @NotEmpty(message = "Department name cannot be empty")
-    @NotBlank(message = "Department name cannot be blank")
-    @Size(min = 2, max = 100, message = "Department name must be between 2 and 100 characters")
     @Column(nullable = false, unique = true)
     private String name;
 
