@@ -33,4 +33,11 @@ public class Employee {
     protected void onCreate() {
         createdAt = java.time.LocalDateTime.now();
     }
+
+    public Employee(Integer id, String name, String email, Department department) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.department = department;
+    }
 }

@@ -1,83 +1,112 @@
-# 📘 Employee Management System (Spring Boot + PostgreSQL)
+# 📘 Employee Management System (Spring Boot + PostgreSQL + Docker)
 
-A simple **Employee Management REST API** built using Spring Boot, Spring Data JPA, and PostgreSQL.  
-This project demonstrates CRUD operations, entity relationships, validation, and RESTful APIs.
+A production-ready **Employee Management REST API** built using Spring Boot, featuring secure authentication, clean architecture and containerized deployment using Docker and Docker compose.
 
 ---
 
-# 🚀 Tech Stack
+## 🚀 Tech Stack
 
 - Java 17+
 - Spring Boot 3+
 - Spring Web
 - Spring Data JPA
+- Spring Security (JWT)
 - PostgreSQL
 - Maven
+- Swagger (OpenAPI)
+- Docker & Docker Compose
 - VS Code / GitHub Codespaces
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 src/main/java/com/example/empmanagementapp
 
 ├── controller  
 ├── service  
 ├── repository  
-├── entity  
+├── entity   
+├── dto   
+├── mapper   
 ├── exception  
+├── security   
 └── EmpManAppApplication.java  
 
 ---
 
-# 🧩 Features
+## 🧩 Features
 
-## 👨‍💼 Employee Management
-- Create employee
-- Get all employees
-- Get employee by ID
-- Update employee
-- Delete employee
-
-## 🏢 Department Management
-- Create department
-- Get all departments
-
-## 🔗 Relationships
-- One Department → Many Employees
-- JPA Foreign Key Mapping
-
-## 🔍 Filtering
-- Get employees by department
-- Search using query parameters
+- Employee CRUD operations
+- Department management
+- One-to-Many relationship mapping
+- Filtering & pagination
+- JWT-based authentication
+- DTO & Mapper architecture
+- Global exception handling
+- AOP logging
 
 ---
 
-# 🗄️ Database Design
+## 🗄️ Database Design
 
-## Department Table
+### Department Table
 
-| Column | Type | Constraints |
-|--------|------|------------|
-| id     | Long | Primary Key |
+| Column | Type   | Constraints      |
+|--------|--------|------------------|
+| id     | Long   | Primary Key      |
 | name   | String | Unique, Not Null |
 
 ---
 
-## Employee Table
+### Employee Table
 
-| Column | Type | Constraints |
-|--------|------|------------|
-| id     | Long | Primary Key |
-| name   | String | Not Null |
-| email  | String | Unique |
-| department_id | FK | References Department |
+| Column        | Type   | Constraints           |
+|---------------|--------|-----------------------|
+| id            | Long   | Primary Key           |
+| name          | String | Not Null              |
+| email         | String | Unique                |
+| department_id | FK     | References Department |
 
 ---
 
-# 🔗 Sample API Endpoints
+### Users Table
 
-## 🏢 Department APIs
+| Column     | Type   | Constraints      |
+|------------|--------|------------------|
+| id         | Long   | Primary Key      |
+| username   | String | Unique, Not Null |
+| password   | String | Not Null         |
+
+---
+
+## Docker Setup
+
+Run:
+docker-compose up --build
+
+Access:
+http://localhost:8080
+http://localhost:8080/swagger-ui/index.html
+
+
+---
+
+## Authentication
+
+POST /api/auth/login
+{
+  "username": "admin",
+  "password": "admin
+}
+
+Use:
+Authorization: Bearer <token>
+
+
+## 🔗 Sample API Endpoints
+
+### 🏢 Department APIs
 
 ### Create Department
 POST /api/departments
@@ -89,7 +118,7 @@ POST /api/departments
 ```
 
 
-## Employee APIs
+### Employee APIs
 
 ### Create Employee
 POST /api/employees
@@ -104,22 +133,10 @@ POST /api/employees
 }
 ```
 
-## 🧠 Concepts Covered
-- REST API development
-- Spring Boot architecture
-- JPA relationships (OneToMany, ManyToOne)
-- Request validation
-- Exception handling
-- Query methods
-- RequestParam filtering
-
-
 ## 📌 Future Improvements
-- DTO layer
-- Pagination & Sorting
-- Swagger API documentation
-- Spring Security authentication
-- Docker deployment
+- Unit Testing
+- CI/CD pipeline
+- Kubernetes deployment
 
 
 ## 👨‍💻 Author
