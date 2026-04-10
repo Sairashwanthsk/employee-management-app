@@ -2,24 +2,70 @@
 @baseUrl = http://localhost:8080/api
 
 
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpassword"
+}
+
+
+### Attempt to register with existing username
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpassword"
+}
+
+
+### User login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpassword"
+}
+
+@jwt = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc3NTc5NjU4OSwiZXhwIjoxNzc1ODMyNTg5fQ.X7HroGTsU6ikx70nrCHRnAZWHPAKJi0F_oTwQoSYPYA
+
+
+### Invalid login attempt
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "wrongpassword"
+}
+
+
 ### Get all departments
 GET {{baseUrl}}/departments
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Delete Department (valid)
 DELETE {{baseUrl}}/departments/10
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Delete Department (invalid)
 DELETE {{baseUrl}}/departments/999
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Create Department (Success)
 POST {{baseUrl}}/departments
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "IT"
@@ -38,6 +84,7 @@ Content-Type: application/json
 ### Empty Department name (bad request)
 POST {{baseUrl}}/departments
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": ""
@@ -49,26 +96,31 @@ Content-Type: application/json
 ### Get all employees
 GET {{baseUrl}}/employees
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get all employees with pagination
 GET {{baseUrl}}/employees?page=0&size=5
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get all employees in sorted order
 GET {{baseUrl}}/employees?sort=name,asc
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get all employees in sorted order with pagination
 GET {{baseUrl}}/employees?page=0&size=5&sort=name,asc
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Create a new employee
 POST {{baseUrl}}/employees
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "John Doe 6",
@@ -80,6 +132,7 @@ Content-Type: application/json
 ### Create a new employee with non-existing department
 POST {{baseUrl}}/employees
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "Jane Doe",
@@ -91,6 +144,7 @@ Content-Type: application/json
 ### Create Employee with missing email (bad request)
 POST {{baseUrl}}/employees
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "John Doe",
@@ -101,26 +155,31 @@ Content-Type: application/json
 ### Get employees by department
 GET {{baseUrl}}/employees?departmentId=12
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get employees by non-existing department (should return empty list)
 GET {{baseUrl}}/employees?departmentId=999
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get employee by ID (valid)
 GET {{baseUrl}}/employees/9
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Get employee by ID (invalid)
 GET {{baseUrl}}/employees/999
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Update an existing employee (valid)
 PUT {{baseUrl}}/employees/9
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "John Doe Updated",
@@ -131,6 +190,7 @@ Content-Type: application/json
 ### Update an existing employee with non-existing department
 PUT {{baseUrl}}/employees/9
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "name": "John Doe Updated",
@@ -142,11 +202,13 @@ Content-Type: application/json
 ### Delete an employee (valid)
 DELETE {{baseUrl}}/employees/9
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 ### Delete an employee (invalid)
 DELETE {{baseUrl}}/employees/999
 Accept: application/json
+Authorization: Bearer {{jwt}}
 
 
 
@@ -154,12 +216,14 @@ Accept: application/json
 ### Empty body for creating employee (bad request)
 POST {{baseUrl}}/employees
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {}
 
 ### Empty body for creating department (bad request)
 POST {{baseUrl}}/departments
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {}
 
@@ -167,6 +231,7 @@ Content-Type: application/json
 ### Empty body for updating employee (bad request)
 PUT {{baseUrl}}/employees/1
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {}
 
@@ -174,10 +239,18 @@ Content-Type: application/json
 ### Empty body for updating department (bad request)
 PUT {{baseUrl}}/departments/1
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {}
+
+
+### Invalid JWT token
+GET {{baseUrl}}/employees
+Accept: application/json
+Authorization: Bearer invalid.jwt.token
 
 
 ### Wrong enpoint
 GET {{baseUrl}}/employee
 Accept: application/json
+Authorization: Bearer {{jwt}}
